@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padaria Santo Afonso</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="menu-container"></div>
+  <form id="menu-form">
+    <input type="hidden" id="item-id">
+    <input type="text" id="item-name" placeholder="Name" required>
+    <input type="text" id="item-category" placeholder="Category" required>
+    <input type="text" id="item-thumbnailUrl" placeholder="Thumbnail URL" required>
+    <input type="number" id="item-price" placeholder="Price" required>
+    <input type="checkbox" id="item-isVisible"> Visible
+    <button type="submit">Save</button>
+  </form>
+  <script src="main.js"></script>
+</body>
+</html>
