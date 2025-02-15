@@ -1,4 +1,11 @@
+const functionsBaseUrl = 'http://localhost:8888/.netlify/functions'
+
 document.addEventListener('DOMContentLoaded', () => {
+
+  if (isAuthenticated()) {
+    document.querySelector('#login').classList.add('hidden');
+    document.getElementById('admin').classList.remove('hidden');
+  }
   const menuContainer = document.getElementById('menu-container');
   const menuForm = document.getElementById('menu-form');
   const itemIdInput = document.getElementById('item-id');
@@ -18,20 +25,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   function renderMenuItems() {
-    menuContainer.innerHTML = '';
-    menuItems.forEach(item => {
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'menu-item';
-      itemDiv.innerHTML = `
-        <h3>${item.name}</h3>
-        <p>Categoria: ${item.category}</p>
-        <p>Preço: $${item.price}</p>
-        <p>Visível: ${item.isVisible}</p>
-        <button onclick="editItem(${item.id})">Edit</button>
-        <button onclick="deleteItem(${item.id})">Delete</button>
-      `;
-      menuContainer.appendChild(itemDiv);
-    });
+    menuContainer.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Visible</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${menuItems.map(item => `
+            <tr>
+              <td>${item.name}</td>
+              <td>${item.category}</td>
+              <td>$${item.price}</td>
+              <td>${item.isVisible}</td>
+              <td>
+                <button onclick="editItem(${item.id})">Edit</button>
+                <button onclick="deleteItem(${item.id})">Delete</button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
   }
 
   window.editItem = function(id) {
@@ -71,4 +91,28 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMenuItems();
     menuForm.reset();
   });
+
+  document.getElementById('login-button').addEventListener('click', (e) => {
+    const password = document.getElementById('password').value;
+    fetch(`${functionsBaseUrl}/validatePassword`, {
+      method: 'POST',
+      body: JSON.stringify({ "password": password }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.isAuthorized) {
+          document.querySelector('#login').classList.toggle('hidden');
+          document.getElementById('admin').classList.toggle('hidden');
+          localStorage.setItem('authenticationToken', btoa(password));
+        }
+      });
+  });
 });
+
+function isAuthenticated() {
+  return localStorage.getItem('authenticationToken') !== null;
+}

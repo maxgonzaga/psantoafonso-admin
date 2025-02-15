@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Padaria Santo Afonso</title>
+  <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
   <link rel="stylesheet" href="styles.css">
-  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
+
 <body>
-  <div data-netlify-identity-menu></div>
-  <div data-netlify-identity-button>Login with Netlify Identity</div>
-  <div id="menu-container"></div>
-  <form id="menu-form">
-    <input type="hidden" id="item-id">
-    <input type="text" id="item-name" placeholder="Name" required>
-    <input type="text" id="item-category" placeholder="Category" required>
-    <input type="text" id="item-thumbnailUrl" placeholder="Thumbnail URL" required>
-    <input type="number" id="item-price" placeholder="Price" required>
-    <input type="checkbox" id="item-isVisible"> Visible
-    <button type="submit">Save</button>
-  </form>
+  <div id="login">
+    <div>
+      <h1 class="">Padaria Santo Afonso</h1>
+      <p class="leading-text">Entre com sua conta para acessar o painel de administração.</p>
+      <fieldset>
+        <label for="password">Senha</label>
+        <input type="password" id="password" required>
+        <button id="login-button">Login</button>
+      </fieldset>
+    </div>
+  </div>
+  <div id="admin" class="hidden">
+    <nav class="navbar">
+      <div class="title">Padaria Santo Afonso</div>
+      <button class="logout-button">Sair</button>
+    </nav>
+    <div id="menu-container"></div>
+    <form id="menu-form">
+      <input type="hidden" id="item-id">
+      <input type="text" id="item-name" placeholder="Name" required>
+      <input type="text" id="item-category" placeholder="Category" required>
+      <input type="text" id="item-thumbnailUrl" placeholder="Thumbnail URL" required>
+      <input type="number" id="item-price" placeholder="Price" required>
+      <input type="checkbox" id="item-isVisible"> Visible
+      <button type="submit">Save</button>
+    </form>
+  </div>
   <script src="main.js"></script>
 </body>
+
 </html>

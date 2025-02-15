@@ -2,9 +2,16 @@ body {
   font-family: Arial, sans-serif;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #menu-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
   gap: 16px;
   padding: 16px;
 }
@@ -17,7 +24,6 @@ body {
 
 #menu-form {
   margin: 16px;
-  display: flex;
   flex-direction: column;
   gap: 8px;
 }
@@ -26,4 +32,54 @@ body {
 #menu-form button {
   padding: 8px;
   font-size: 16px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+nav {
+  display: flex;
+  position: sticky;
+  align-items: center;
+  justify-content: space-between;
+  top: 0px;
+  background: rgb(255 127 39);
+  background-blend-mode: darken;
+  background-size: cover;
+  color: white;
+  padding: 10px 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
 }
