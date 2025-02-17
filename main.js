@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
               <td>${item.isVisible}</td>
               <td>
                 <button onclick="editItem(${item.id})">Editar</button>
-                <button onclick="deleteItem(${item.id})">Apagar</button>
               </td>
             </tr>
           `).join('')}
