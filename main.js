@@ -1,17 +1,23 @@
 const functionsBaseUrl = 'http://localhost:8888/.netlify/functions'
 
 document.addEventListener('DOMContentLoaded', () => {
+  const dialog = document.querySelector('.modal');
+  const dialogCloseButton = document.querySelector("dialog .btn-close");
+
+  dialogCloseButton.addEventListener("click", () => {
+    dialog.close();
+  });
 
   if (isAuthenticated()) {
     document.querySelector('#login').classList.add('hidden');
     document.getElementById('admin').classList.remove('hidden');
   }
+
   const menuContainer = document.getElementById('menu-container');
   const menuForm = document.getElementById('menu-form');
   const itemIdInput = document.getElementById('item-id');
   const itemNameInput = document.getElementById('item-name');
   const itemCategoryInput = document.getElementById('item-category');
-  const itemThumbnailUrlInput = document.getElementById('item-thumbnailUrl');
   const itemPriceInput = document.getElementById('item-price');
   const itemIsVisibleInput = document.getElementById('item-isVisible');
 
@@ -29,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Visible</th>
-            <th>Actions</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Habilitado</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -44,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <td>$${item.price}</td>
               <td>${item.isVisible}</td>
               <td>
-                <button onclick="editItem(${item.id})">Edit</button>
-                <button onclick="deleteItem(${item.id})">Delete</button>
+                <button onclick="editItem(${item.id})">Editar</button>
+                <button onclick="deleteItem(${item.id})">Apagar</button>
               </td>
             </tr>
           `).join('')}
@@ -55,11 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.editItem = function(id) {
+    dialog.showModal();
     const item = menuItems.find(item => item.id === id);
     itemIdInput.value = item.id;
     itemNameInput.value = item.name;
     itemCategoryInput.value = item.category;
-    itemThumbnailUrlInput.value = item.thumbnailUrl;
     itemPriceInput.value = item.price;
     itemIsVisibleInput.checked = item.isVisible;
   };
@@ -70,13 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   menuForm.addEventListener('submit', (e) => {
-    e.preventDefault();
     const id = itemIdInput.value ? parseInt(itemIdInput.value) : Date.now();
     const newItem = {
       id,
       name: itemNameInput.value,
       category: itemCategoryInput.value,
-      thumbnailUrl: itemThumbnailUrlInput.value,
       price: parseFloat(itemPriceInput.value),
       isVisible: itemIsVisibleInput.checked
     };
@@ -87,9 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       menuItems.push(newItem);
     }
-
-    renderMenuItems();
-    menuForm.reset();
+    fetch(`${functionsBaseUrl}/updateMenu`, {
+      method: 'POST',
+      body: JSON.stringify(menuItems),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }).then(response => response.json())
+    .then(() => { renderMenuItems(); menuForm.reset(); })
+    .catch(error => console.error('Error:', error));
   });
 
   document.getElementById('login-button').addEventListener('click', (e) => {

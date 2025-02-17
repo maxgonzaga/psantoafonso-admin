@@ -1,0 +1,22 @@
+{
+  "name": "psantoafonso-admin",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxgonzaga/psantoafonso-admin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxgonzaga/psantoafonso-admin/issues"
+  },
+  "homepage": "https://github.com/maxgonzaga/psantoafonso-admin#readme",
+  "description": "",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.1"
+  }
+}

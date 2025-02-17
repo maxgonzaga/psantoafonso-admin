@@ -27,15 +27,43 @@
       <button class="logout-button">Sair</button>
     </nav>
     <div id="menu-container"></div>
-    <form id="menu-form">
-      <input type="hidden" id="item-id">
-      <input type="text" id="item-name" placeholder="Name" required>
-      <input type="text" id="item-category" placeholder="Category" required>
-      <input type="text" id="item-thumbnailUrl" placeholder="Thumbnail URL" required>
-      <input type="number" id="item-price" placeholder="Price" required>
-      <input type="checkbox" id="item-isVisible"> Visible
-      <button type="submit">Save</button>
-    </form>
+    <dialog class="modal">
+      <form id="menu-form" method="dialog" name="menu-form">
+        <div>
+          <input type="hidden" id="item-id">
+
+          <fieldset>
+            <label for="item-name">Descrição</label>
+            <input type="text" id="item-name" name="item-name" placeholder="" required>
+          </fieldset>
+
+          <fieldset>
+            <label for="item-category">Categoria</label>
+            <select id="item-category" name="item-category" required>
+              <option value="Salgados">Salgados</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Lanches">Lanches</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <label for="item-price">Preço</label>
+            <input type="number" name="item-price" id="item-price" placeholder="" required>
+          </fieldset>
+
+          <fieldset>
+            <label for="item-isVisible">Habilitado</label>
+            <input type="checkbox" name="item-isVisible" id="item-isVisible">
+          </fieldset>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">Salvar</button>
+          <button type="button" class="btn btn-close" formmethod="dialog">Cancelar</button>
+        </div>
+
+      </form>
+    </dialog>
   </div>
   <script src="main.js"></script>
 </body>
