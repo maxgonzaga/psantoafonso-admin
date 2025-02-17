@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dialog = document.querySelector('.modal');
   const dialogCloseButton = document.querySelector("dialog .btn-close");
   const addItemButton = document.querySelector("#add-item");
-  
+
   let menuItems = [];
 
   dialogCloseButton.addEventListener("click", () => {
@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#login').classList.add('hidden');
     document.getElementById('admin').classList.remove('hidden');
   }
-    
+
   addItemButton.addEventListener("click", () => {
     dialog.showModal();
     itemIdInput.value = Math.max(...menuItems.map(item => item.id)) + 1;
-  });  
+  });
 
   fetch(`${functionsBaseUrl}/getMenu`)
     .then(response => response.json())
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  window.editItem = function(id) {
+  window.editItem = function (id) {
     dialog.showModal();
     const item = menuItems.find(item => item.id === id);
     itemIdInput.value = item.id;
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     itemIsVisibleInput.checked = item.isVisible;
   };
 
-  window.deleteItem = function(id) {
+  window.deleteItem = function (id) {
     menuItems = menuItems.filter(item => item.id !== id);
     renderMenuItems();
   };
@@ -96,16 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       menuItems.push(newItem);
     }
-    fetch(`${functionsBaseUrl}/updateMenu`, {
-      method: 'POST',
-      body: JSON.stringify(menuItems),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    }).then(response => response.json())
-    .then(() => { renderMenuItems(); menuForm.reset(); })
-    .catch(error => console.error('Error:', error));
+    updateMenu()
+      .then(response => response.json())
+      .then(() => { renderMenuItems(); menuForm.reset(); })
+      .catch(error => console.error('Error:', error));
   });
 
   document.getElementById('login-button').addEventListener('click', (e) => {
@@ -131,4 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function isAuthenticated() {
   return localStorage.getItem('authenticationToken') !== null;
+}
+
+function updateMenu() {
+  return fetch(`${functionsBaseUrl}/updateMenu`, {
+    method: 'POST',
+    body: JSON.stringify(menuItems),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  });
 }
