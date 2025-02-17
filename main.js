@@ -1,8 +1,19 @@
 const functionsBaseUrl = 'https://psantoafonso-admin.netlify.app/.netlify/functions'
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  const menuContainer = document.getElementById('menu-container');
+  const menuForm = document.getElementById('menu-form');
+  const itemIdInput = document.getElementById('item-id');
+  const itemNameInput = document.getElementById('item-name');
+  const itemCategoryInput = document.getElementById('item-category');
+  const itemPriceInput = document.getElementById('item-price');
+  const itemIsVisibleInput = document.getElementById('item-isVisible');
   const dialog = document.querySelector('.modal');
   const dialogCloseButton = document.querySelector("dialog .btn-close");
+  const addItemButton = document.querySelector("#add-item");
+  
+  let menuItems = [];
 
   dialogCloseButton.addEventListener("click", () => {
     dialog.close();
@@ -12,18 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#login').classList.add('hidden');
     document.getElementById('admin').classList.remove('hidden');
   }
+    
+  addItemButton.addEventListener("click", () => {
+    dialog.showModal();
+    itemIdInput.value = Math.max(...menuItems.map(item => item.id)) + 1;
+  });  
 
-  const menuContainer = document.getElementById('menu-container');
-  const menuForm = document.getElementById('menu-form');
-  const itemIdInput = document.getElementById('item-id');
-  const itemNameInput = document.getElementById('item-name');
-  const itemCategoryInput = document.getElementById('item-category');
-  const itemPriceInput = document.getElementById('item-price');
-  const itemIsVisibleInput = document.getElementById('item-isVisible');
-
-  let menuItems = [];
-
-  fetch('menu-items.json')
+  fetch(`${functionsBaseUrl}/getMenu`)
     .then(response => response.json())
     .then(data => {
       menuItems = data;
