@@ -5,7 +5,7 @@ export default async (req, context) => {
   try {
     const requestBody = await req.json();
     menuStore.setJSON("menu", requestBody);
-    const response = new Response(requestBody);
+    const response = new Response(JSON.stringify(requestBody));
     return response;
   } catch (error) {
     const response = new Response({ status: 500 });
