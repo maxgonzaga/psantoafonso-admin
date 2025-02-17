@@ -5,11 +5,10 @@ export default async (req, context) => {
   try {
     const requestBody = await req.json();
     menuStore.setJSON("menu", requestBody);
-    const response = new Response(requestBody, { status: 204 });
+    const response = new Response(requestBody);
     return response;
   } catch (error) {
-    const menu = menuStore.get("menu");
-    const response = new Response(menu, { status: 500, error });
+    const response = new Response(error, { status: 500 });
     return response;
   }
 };
