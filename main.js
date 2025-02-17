@@ -1,4 +1,4 @@
-const functionsBaseUrl = 'http://localhost:8888/.netlify/functions'
+const functionsBaseUrl = 'https://psantoafonso-admin.netlify.app/.netlify/functions'
 
 document.addEventListener('DOMContentLoaded', () => {
   const dialog = document.querySelector('.modal');
