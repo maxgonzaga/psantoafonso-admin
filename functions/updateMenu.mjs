@@ -8,7 +8,8 @@ export default async (req, context) => {
     const response = new Response(requestBody, { status: 204 });
     return response;
   } catch (error) {
-    const response = new Response(menuStore.get("menu"), { status: 500 });
+    const menu = menuStore.get("menu");
+    const response = new Response(menu, { status: 500, error });
     return response;
   }
 };
