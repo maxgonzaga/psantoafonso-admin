@@ -9,7 +9,8 @@ export default async (req, context) => {
       JSON.stringify(requestBody),
       {
         headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Allow-Headers': '*', 'Content-Type': 'application/json' },
-        status: 200
+        status: 200,
+        statusText: 'OK'
       });
     return response;
   } catch (error) {
