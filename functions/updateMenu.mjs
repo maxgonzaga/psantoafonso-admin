@@ -8,7 +8,7 @@ export default async (req, context) => {
     const response = new Response(
       JSON.stringify(requestBody),
       {
-        headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Allow-Headers': '*' },
+        headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Allow-Headers': '*', 'Content-Type': 'application/json' },
         status: 200
       });
     return response;
