@@ -6,9 +6,11 @@ export default async (req, context) => {
     const requestBody = await req.json();
     menuStore.setJSON("menu", requestBody);
     const response = new Response(
-      JSON.stringify(requestBody), {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    });
+      JSON.stringify(requestBody),
+      {
+        headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*' },
+        status: 200
+      });
     return response;
   } catch (error) {
     const response = new Response(null, { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } });
