@@ -121,19 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
   });
+
+  function updateMenu() {
+    return fetch(`${functionsBaseUrl}/updateMenu`, {
+      method: 'POST',
+      body: JSON.stringify(menuItems),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
+  }
 });
 
 function isAuthenticated() {
   return localStorage.getItem('authenticationToken') !== null;
-}
-
-function updateMenu() {
-  return fetch(`${functionsBaseUrl}/updateMenu`, {
-    method: 'POST',
-    body: JSON.stringify(menuItems),
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  });
 }
