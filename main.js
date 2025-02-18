@@ -1,4 +1,4 @@
-const functionsBaseUrl = 'https://psantoafonso-admin.netlify.app/.netlify/functions'
+const functionsBaseUrl = 'https://psantoafonso-admin.netlify.app/api'
 
 document.addEventListener('DOMContentLoaded', () => {
 
