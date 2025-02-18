@@ -10,7 +10,7 @@ export default async (req, context) => {
       });
     return response;
   } catch (error) {
-    const response = new Response({ status: 500 });
+    const response = new Response({ status: 500, headers: { 'Access-Control-Allow-Origin': '*' }});
     return response;
   }
 };
