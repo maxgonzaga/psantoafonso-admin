@@ -1,4 +1,5 @@
 const functionsBaseUrl = 'https://psantoafonso-admin.netlify.app/api'
+// const functionsBaseUrl = 'http://localhost:8888/api'
 
 document.addEventListener('DOMContentLoaded', () => {
 
