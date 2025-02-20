@@ -1,5 +1,5 @@
 import { getStore } from "@netlify/blobs";
-import corsResponse from "../lib/corsResponse.mts";
+import { corsHeaders, corsResponse } from "../lib/corsResponse.mts";
 
 export default async (req, context) => {
 
@@ -12,9 +12,9 @@ export default async (req, context) => {
     const menu = await menuStore.get("menu");
     return new Response(menu,
       {
-        headers: { 'Access-Control-Allow-Origin': 'http://localhost:8888' }
+        headers: { ...corsHeaders, 'Content-type': 'application/json' }
       });
   } catch (error) {
-    return new Response(null, { status: 500, headers: { 'Access-Control-Allow-Origin': 'http://localhost:8888' }});
+    return new Response(null, { status: 500, headers: corsHeaders });
   }
 };
