@@ -24,7 +24,7 @@ export default async (req, context) => {
   }
   try {
     const menuStore = getStore("menu");
-    menuStore.setJSON("menu", requestBody);
+    await menuStore.setJSON("menu", requestBody);
     return new Response(JSON.stringify(requestBody), { status: 200, headers });
   } catch (error) {
     return new Response(null, { status: 500, headers });
