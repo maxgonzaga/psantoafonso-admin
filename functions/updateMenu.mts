@@ -1,5 +1,5 @@
 import { getStore } from "@netlify/blobs";
-import { corsResponse, corsHeaders } from "../lib/corsResponse.mts";
+import { corsResponse } from "../lib/corsResponse.mts";
 
 export default async (req, context) => {
 
@@ -16,7 +16,12 @@ export default async (req, context) => {
     return new Response(null, { status: 400 });
   }
 
-  const headers = { 'Content-type': 'application/json', ...corsHeaders }
+  const headers = {
+    'Content-type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Headers': '*' 
+  }
   try {
     const menuStore = getStore("menu");
     menuStore.setJSON("menu", requestBody);
