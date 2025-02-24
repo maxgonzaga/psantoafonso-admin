@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Padaria Santo Afonso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,25 +13,40 @@
 <body>
   <div id="login">
     <div>
-      <h1 class="">Padaria Santo Afonso</h1>
-      <p class="leading-text">Entre com sua conta para acessar o painel de administração.</p>
-      <fieldset>
-        <label for="password">Senha</label>
-        <input type="password" id="password" required>
-        <button id="login-button">Login</button>
-      </fieldset>
+      <h1 id="title" class="title m-y-1 center">Padaria Santo Afonso</h1>
+      <p class="leading-text m-y-2">Entre com sua conta para administrar o cardápio.</p>
+      <form class="login-form-content" action="" method="dialog">
+        <fieldset>
+          <label for="username">Usuário</label>
+          <input type="text" id="username" required placeholder="">
+        </fieldset>
+        <fieldset>
+          <label for="password">Senha</label>
+          <input type="password" id="password" required placeholder="">
+        </fieldset>
+        <div class="validation">
+          <p id="validation-message">Usuário ou senha inválidos.</p>
+        </div>
+        <div class="login-form-actions">
+          <button id="login-button" type="submit">Entrar</button>
+        </div>
+      </form>
     </div>
   </div>
   <div id="admin" class="hidden">
     <nav class="navbar">
-      <div class="title">Padaria Santo Afonso</div>
-      <button class="logout-button">Sair</button>
+      <div class="title" id="nav-title">Padaria Santo Afonso</div>
+      <button id="logout-button" class="btn">Sair</button>
     </nav>
-    <button id="add-item">Adicionar item</button>
-    <div id="menu-container"></div>
+
+    <div class="content">
+      <button id="add-item" class="btn btn-add">Adicionar item</button>
+      <div id="menu-container"></div>
+    </div>
+
     <dialog class="modal">
       <form id="menu-form" method="dialog" name="menu-form">
-        <div>
+        <div class="form-content">
           <input type="hidden" id="item-id">
 
           <fieldset>
@@ -49,17 +65,17 @@
 
           <fieldset>
             <label for="item-price">Preço</label>
-            <input type="number" name="item-price" id="item-price" placeholder="" required>
+            <input type="number" name="item-price" id="item-price" placeholder="" required min="0.01" max="1000.00" step="0.01">
           </fieldset>
 
           <fieldset>
-            <label for="item-isVisible">Habilitado</label>
-            <input type="checkbox" name="item-isVisible" id="item-isVisible">
+            <label for="item-isVisible">Mostrar?</label>
+            <input checked type="checkbox" class="left-align" name="item-isVisible" id="item-isVisible">
           </fieldset>
         </div>
 
         <div class="form-actions">
-          <button type="submit">Salvar</button>
+          <button type="submit" class="btn btn-save btn-primary">Salvar</button>
           <button type="button" class="btn btn-close" formmethod="dialog">Cancelar</button>
         </div>
 

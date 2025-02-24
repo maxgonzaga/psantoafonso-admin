@@ -1,5 +1,4 @@
 const functionsBaseUrl = 'https://psantoafonso-admin.netlify.app/api'
-// const functionsBaseUrl = 'http://localhost:8888/api'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -13,15 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const dialog = document.querySelector('.modal');
   const dialogCloseButton = document.querySelector("dialog .btn-close");
   const addItemButton = document.querySelector("#add-item");
+  const logoutButton = document.getElementById('logout-button');
 
   let menuItems = [];
 
+  function clearForm() {
+    itemIdInput.value = '';
+    itemNameInput.value = '';
+    itemCategoryInput.value = '';
+    itemPriceInput.value = '';
+    itemIsVisibleInput.checked = true;
+  }
+
+  logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('authenticationToken');
+    document.getElementById('login').classList.toggle('hidden');
+    document.getElementById('admin').classList.toggle('hidden');
+  });
+  
   dialogCloseButton.addEventListener("click", () => {
     dialog.close();
+    clearForm();
   });
 
   if (isAuthenticated()) {
-    document.querySelector('#login').classList.add('hidden');
+    document.getElementById('login').classList.add('hidden');
     document.getElementById('admin').classList.remove('hidden');
   }
 
@@ -34,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
       menuItems = data;
+      console.log(menuItems);
       renderMenuItems();
     });
 
@@ -45,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <th>Descrição</th>
             <th>Categoria</th>
             <th>Preço</th>
-            <th>Habilitado</th>
+            <th class="small-width-column">Mostrar?</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -54,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <tr>
               <td>${item.name}</td>
               <td>${item.category}</td>
-              <td>$${item.price}</td>
-              <td>${item.isVisible}</td>
+              <td>${formatAsCurrency(item.price)}</td>
+              <td  class="small-width-column">${item.isVisible ? "<span class='item-visible'>&#9989;</span>" : "<span class='item-hidden'>&#10060;</span>"}</td>
               <td>
-                <button onclick="editItem(${item.id})">Editar</button>
+                <button class="btn-edit" onclick="editItem(${item.id})">Editar</button>
               </td>
             </tr>
           `).join('')}
@@ -116,9 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(response => response.json())
       .then(data => {
         if (data.isAuthorized) {
-          document.querySelector('#login').classList.toggle('hidden');
-          document.getElementById('admin').classList.toggle('hidden');
+          document.getElementById('login').classList.add('hidden');
+          document.getElementById('admin').classList.remove('hidden');
           localStorage.setItem('authenticationToken', btoa(password));
+          document.getElementById('password').value = '';
+          document.getElementById('username').value = '';
         }
       });
   });
@@ -132,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'Content-Type': 'application/json'
       },
     });
+  }
+
+  function formatAsCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   }
 });
 
