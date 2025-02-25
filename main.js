@@ -116,9 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('login-button').addEventListener('click', (e) => {
     const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value;
     fetch(`${functionsBaseUrl}/validatePassword`, {
       method: 'POST',
-      body: JSON.stringify({ "password": password }),
+      body: JSON.stringify({ username, password }),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -132,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('authenticationToken', btoa(password));
           document.getElementById('password').value = '';
           document.getElementById('username').value = '';
+        }
+        else {
+          document.getElementById('validation-message').classList.remove('not-visible');
         }
       });
   });

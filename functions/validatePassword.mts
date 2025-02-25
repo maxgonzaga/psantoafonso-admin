@@ -21,7 +21,7 @@ export default async (req: Request, context: Context) => {
     'Access-Control-Allow-Methods': '*',
     'Access-Control-Allow-Headers': '*' 
   }
-  if (request.password === "arthur_pafonso_admin_2025") {
+  if ((request.password === "arthur_pafonso_admin_2025") && (request.username === "arthur")) {
     const body = { isAuthorized: true };
     return new Response(JSON.stringify(body), { status: 200, headers });
   }

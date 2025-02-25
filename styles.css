@@ -261,7 +261,6 @@ input.left-align {
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 10px;
-  visibility: hidden;
 }
 
 dialog label {
@@ -289,4 +288,8 @@ nav > div {
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
+}
+
+.not-visible {
+  visibility: hidden;
 }
