@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
       menuItems = data;
-      console.log(menuItems);
       renderMenuItems();
     });
 
@@ -58,23 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
       <table>
         <thead>
           <tr>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Preço</th>
-            <th class="small-width-column">Mostrar?</th>
-            <th>Ações</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col" class="small-width-column">Preço</th>
+            <th scope="col" class="small-width-column">Mostrar?</th>
           </tr>
         </thead>
         <tbody>
           ${menuItems.map(item => `
             <tr>
-              <td>${item.name}</td>
+              <td scope="row" onclick="editItem(${item.id})">${item.name}</td>
               <td>${item.category}</td>
-              <td>${formatAsCurrency(item.price)}</td>
-              <td  class="small-width-column">${item.isVisible ? "<span class='item-visible'>&#9989;</span>" : "<span class='item-hidden'>&#10060;</span>"}</td>
-              <td>
-                <button class="btn-edit" onclick="editItem(${item.id})">Editar</button>
-              </td>
+              <td class="small-width-column">${formatAsCurrency(item.price)}</td>
+              <td class="small-width-column">${item.isVisible ? "<span class='item-visible'>&#9989;</span>" : "<span class='item-hidden'>&#10060;</span>"}</td>
             </tr>
           `).join('')}
         </tbody>

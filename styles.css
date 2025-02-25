@@ -14,7 +14,7 @@ button {
 .title {
   font-weight: bold;
   font-family: "Lora";
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 }
 
 #menu-container {
@@ -55,8 +55,9 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: #fae5d3; */
-  background: #faed13;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/bg-01.jpg");
+  background-size: cover;
+  box-sizing: border-box;
 }
 
 #login-button {
@@ -73,32 +74,39 @@ button {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 12px;
+  min-width: 300px;
+  box-sizing: border-box;
 }
 
 #login input {
   display: block;
 }
 
-nav {
+nav > div {
   display: flex;
   position: sticky;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
+}
+
+nav {
   top: 0px;
   background: #ee1a26;
   background-blend-mode: darken;
   background-size: cover;
   color: white;
   padding: 10px 20px;
-  height: 30px;
+  height: 60px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 16px 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 
@@ -106,12 +114,11 @@ th {
   height: 40px;
   background-color: yellow;
   font-weight: bold;
-  font-size: 1rem;
 }
 
 th, td {
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 8px 4px;
   text-align: left;
   vertical-align: middle;
 }
@@ -125,14 +132,16 @@ th {
 }
 
 dialog {
-  min-width: 600px;
-  padding: 30px;
+  min-width: 300px;
+  width: 600px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
   opacity: 0;
   transition-property: overlay display opacity;
   transition-duration: 200ms;
   transition-behavior: allow-discrete;
+  box-sizing: border-box;
 }
 
 dialog[open] {
@@ -188,24 +197,22 @@ button {
   padding-right: 20px;
 }
 
+
+
 .small-width-column {
-  width: 80px;
+  width: 70px;
   text-align: center;
 }
 
 input, select {
   padding: 8px;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   box-sizing: border-box;
   border-radius: 6px;
-}
-
-#admin fieldset {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 8px;
-  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  font-family: inherit;
+  font-weight: 600;
 }
 
 #admin .form-actions {
@@ -255,4 +262,31 @@ input.left-align {
   font-size: 0.9rem;
   margin-bottom: 10px;
   visibility: hidden;
+}
+
+dialog label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+dialog input, dialog select {
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+dialog input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+}
+
+td[scope="row"]:hover {
+  background-color: #ee1a250e;
+  cursor: pointer;
+}
+
+nav > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
