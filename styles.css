@@ -68,6 +68,11 @@ button {
   display: block;
   font-size: 1rem;
   border: none;
+  transition: 100ms ease background-color;
+}
+
+#login-button:hover {
+  background-color: #ff000d;
 }
 
 #login > div {
@@ -293,3 +298,4 @@ nav > div {
 .not-visible {
   visibility: hidden;
 }
+
